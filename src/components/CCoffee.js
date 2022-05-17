@@ -9,15 +9,17 @@ class CCoffee extends React.Component {
       }
   }
   handleClick() {
-      this.setState({count: this.state.count + 1})
+      this.setState({count: this.state.count + 1}) // built-in method from React that merges old state with new state
 
   }
-  render() {
+  render() { // every class component has to have a render method which returns valid JSX
+    const { count } = this.state;
+    const { firstName } = this.props;
     return (
       <>
         <h1>Coffee List (cc)</h1>
-        <p>Hello {this.props.firstName}</p>
-        <p>You clicked the button {this.state.count} times.</p>
+        <p>Hello {firstName}</p>
+        <p>You clicked the button {count} times.</p>
         <button onClick={() => this.handleClick()}>Click Me</button>
       </>
     );
