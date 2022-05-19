@@ -3,23 +3,17 @@ import { useEffect, useState } from "react"
 
 export default function ContactForm(){
     const [formData, setFormData] = useState({})
-
     const [terms, setTerms] = useState(false)
     const [validForm, setValidForm] = useState(false)
 
-    // const contactFormInfo = {
-    //     firstName: firstName, 
-    //     lastName: lastName,
-    //     terms: terms
-    // }
-
     useEffect(() => {
-        if(contactFormInfo.firstName && contactFormInfo.lastName && contactFormInfo.terms){
+        if(formData.firstName && formData.lastName && formData.terms){
         setValidForm(true)
-    }}, [contactFormInfo.firstName, contactFormInfo.lastName, contactFormInfo.terms])
+        }
+    }, [formData.firstName, formData.lastName, formData.terms])
 
 
-    // // e == event. it's a shorthand 
+    // e is a shortahnd for event 
     const sendData = e => {
         e.preventDefault() // stopping behavior of wanting to refresh the page, & allowing us to control it
         
@@ -36,43 +30,42 @@ export default function ContactForm(){
     }
 
     const setFormOject = event => {
-        // setFormData(event.target.value)
         setFormData({...formData, [event.target.name]: event.target.value})
     }
 
     console.log(formData)
     
-    return( <>
-    <form method="post">
-        <label>First Name: 
+    return( 
+    <>
+    <form>
+        <label>
+            First Name: 
             <input 
             type="text" 
             name="firstName" 
             placeholder="First Name" 
             // onChange={event => setFormData( {...formData, firstName: event.target.value} )} /> 
-            onChange={setFormOject}/> 
+            onChange={setFormOject}
+            /> 
         </label>
         
         <br />
-        <label>Last Name: 
-        <input 
-        type="text" 
-        name="lastName" 
-        onChange={setFormOject}/> 
+        <label>
+            Last Name: 
+        <input type="text" name="lastName" onChange={setFormOject}/> 
         </label>
          
         <br />
-        <label>Address: 
+        <label>
+            Address: 
         <input type="text" name="address" onChange={setFormOject}/>  
         </label>
         
         <br />
-        <label>Zip: 
+        <label>
+            Zip: 
         <input 
-        type="text" 
-        name="zip" 
-        maxLength={5} 
-        onChange={setFormOject}/>  
+        type="text" name="zip" maxLength={5} onChange={setFormOject}/>  
         </label>
         
         <br />
@@ -86,8 +79,8 @@ export default function ContactForm(){
             <option value="nj">NJ</option>
         </select>
         </label>
-
         <br />
+
         <label>
             Date:
         <input type="date" name="date" />
@@ -95,14 +88,16 @@ export default function ContactForm(){
 
         <br />
         <label> Terms and conditions
-        <input type="checkbox" onChange={event => setTerms(event.target.checked)} />
+        <input type="checkbox" onChange={setFormOject} />
         </label>
         <br />
+
         <label>message:
-            <textarea name="message" cols="30" rows="10" />
+            <textarea name="message" cols="30" rows="10" onChange={setFormOject}/>
         </label>
         <br />
-        <button onClick={(e)=>sendData(e)} disabled={!validForm}>
+
+        <button onClick={(e)=>sendData(e)} >
         Submit
         </button>
     </form>
